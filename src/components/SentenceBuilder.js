@@ -57,20 +57,19 @@ function SentenceBuilder() {
       .then((res) => {
         dispatch({type: 'FETCH_SUCCESS', payload: res.data[0], wordTypes: Object.keys(res.data)});
         setWordTypes(Object.keys(res.data[0]));
-        console.log('how is it here... ???');
       })
       .catch(() => {
         dispatch({type: 'FETCH_ERROR'})
       });
-  }, []);
-
+    }, []);
+    
   return (
     <div>
       {
         state.loading
           ? <h2 className="text-center">Hang on Shakespeare, we're loading your canvas...</h2>
-          : state.err
-            ? <h2 className="text-center">Seems we have writer's block at the moment, check-in in 5 minutes hot shot, We need to do some Pomodoro.</h2>
+          : !!state.error
+            ? <h2 className="text-center">Seems we have writer's block at the moment, check back in 5 minutes hot shot, We need to do some Pomodoro.</h2>
             : <div>
                 <div className="btn-group d-flex" role="group" aria-label="...">
                   {
