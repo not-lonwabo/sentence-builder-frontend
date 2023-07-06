@@ -30,9 +30,14 @@ function SentenceBuilder() {
 
   const [wordTypes, setWordTypes] = useState([]);
   const [type, setType] = useState('');
+  const [selectIndex, setSelectIndex] = useState();
   const [editedSentence, setEditedSentence] = useState('');
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const clickType = (speechType, index) => {
+    setType(speechType);
+    setSelectIndex(index)
+  }
   const buildSentence = (newWord) => {
     if (!editedSentence) {
       newWord = newWord.charAt(0).toUpperCase() + newWord.slice(1);
@@ -73,8 +78,8 @@ function SentenceBuilder() {
             : <div>
                 <div className="btn-group d-flex flex-wrap" aria-label="...">
                   {
-                    wordTypes.slice(1, wordTypes.length-2).map(speechType => {
-                      return <button key={speechType} type="button" onClick={() => setType(speechType)} className="btn btn-secondary border w-100">{speechType}</button>
+                    wordTypes.slice(1, wordTypes.length-2).map((speechType, index) => {
+                      return <button key={speechType} type="button" onClick={() => clickType(speechType, index)} disabled={selectIndex === index} className="btn btn-secondary border w-100">{speechType}</button>
                     })
                   }
                 </div>
@@ -89,7 +94,7 @@ function SentenceBuilder() {
                 <div className='btn-group d-flex flex-wrap' role='group' aria-label="...">
                   {
                     type
-                    ? state.words[type].sort().map((item, index) => {
+                    ? [...new Set(state.words[type])].sort().map((item, index) => {
                         return <div key={index} className="badge bg-secondary col-lg-1 fs6" style={{marginBottom: '8px'}} onClick={() => buildSentence(item)}>{item}</div>
                       })
                     : <></>
