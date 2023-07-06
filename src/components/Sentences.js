@@ -44,7 +44,7 @@ function Sentences() {
         state.loading
           ? <h2>Loading...</h2> 
           : state.sentences.map(sentence => {
-            return <p key={sentence.id}>{sentence.sentence}</p>
+            return <p key={sentence.id} className='fs-6'>{sentence.sentence}.</p>
           })
       }
     </div>

@@ -34,12 +34,15 @@ function SentenceBuilder() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const buildSentence = (newWord) => {
+    if (!editedSentence) {
+      newWord = newWord.charAt(0).toUpperCase() + newWord.slice(1);
+    }
     setEditedSentence(prevState => prevState + newWord + ' ')
   }
 
   const postSentence = () => {
     axios.post('http://localhost:5000/sentences/submit', {
-      "sentence": editedSentence
+      "sentence": editedSentence.trimEnd()
     })
     .then(res => {
       alert(res.data)
@@ -58,7 +61,6 @@ function SentenceBuilder() {
       })
       .catch(() => {
         dispatch({type: 'FETCH_ERROR'})
-        console.log('here... ???');
       });
   }, []);
 
@@ -68,7 +70,7 @@ function SentenceBuilder() {
         state.loading
           ? <h2 className="text-center">Hang on Shakespeare, we're loading your canvas...</h2>
           : state.err
-            ? <h2 className="text-center">{state.err}</h2>
+            ? <h2 className="text-center">Seems we have writer's block at the moment, check-in in 5 minutes hot shot, We need to do some Pomodoro.</h2>
             : <div>
                 <div className="btn-group d-flex" role="group" aria-label="...">
                   {
@@ -88,7 +90,7 @@ function SentenceBuilder() {
                 <div className='btn-group d-flex flex-wrap' role='group' aria-label="...">
                   {
                     type
-                    ? state.words[type].map((item, index) => {
+                    ? state.words[type].sort().map((item, index) => {
                         return <div key={index} className="badge bg-secondary col-lg-1 fs6" style={{marginBottom: '8px'}} onClick={() => buildSentence(item)}>{item}</div>
                       })
                     : <></>
