@@ -71,7 +71,7 @@ function SentenceBuilder() {
           : !!state.error
             ? <h2 className="text-center">Seems we have writer's block at the moment, check back in 5 minutes hot shot, We need to do some Pomodoro.</h2>
             : <div>
-                <div className="btn-group d-flex" role="group" aria-label="...">
+                <div className="btn-group d-flex flex-wrap" aria-label="...">
                   {
                     wordTypes.slice(1, wordTypes.length-2).map(speechType => {
                       return <button key={speechType} type="button" onClick={() => setType(speechType)} className="btn btn-secondary border w-100">{speechType}</button>

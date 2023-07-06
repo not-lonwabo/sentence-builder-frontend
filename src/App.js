@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './components/NavBar';
@@ -11,10 +12,12 @@ function App() {
       <div className='container'>
         <NavBar />
         <br/>
-        <Routes>
-          <Route path="/" exact element={<SentenceBuilder/>}/>
-          <Route path="/sentences" element={<Sentences/>}/>
-        </Routes>
+        <div className='rest-of-body'>
+          <Routes>
+            <Route path="/" exact element={<SentenceBuilder/>}/>
+            <Route path="/sentences" element={<Sentences/>}/>
+          </Routes>
+        </div>
       </div>
     </Router>
   );
