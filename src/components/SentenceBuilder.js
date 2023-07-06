@@ -43,6 +43,7 @@ function SentenceBuilder() {
       newWord = newWord.charAt(0).toUpperCase() + newWord.slice(1);
     }
     setEditedSentence(prevState => prevState + newWord + ' ')
+    setType('');
   }
 
   const postSentence = () => {
