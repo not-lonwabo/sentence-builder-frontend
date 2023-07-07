@@ -47,6 +47,7 @@ function SentenceBuilder() {
   }
 
   const postSentence = () => {
+    setEditedSentence('');
     axios.post('http://localhost:5000/sentences/submit', {
       "sentence": editedSentence.trimEnd()
     })
@@ -88,7 +89,7 @@ function SentenceBuilder() {
                 <div className="input-group input-group-lg">
                   <input type="text" className="form-control input-lg" id="search-church" placeholder="Your sentence goes here!" value={editedSentence}/>
                   <span className="input-group-btn">
-                    <button className="btn btn-default btn-lg" type="submit" onClick={() => postSentence()}>Submit</button>
+                    <button className="btn btn-default btn-lg" type="submit" disabled={!editedSentence} onClick={() => postSentence()}>Submit</button>
                   </span>
                 </div>
                 <br/>
