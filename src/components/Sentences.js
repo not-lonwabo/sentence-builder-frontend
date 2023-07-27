@@ -31,7 +31,7 @@ function Sentences() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/sentences')
+    axios.get('http://localhost:4000/sentences')
       .then(res => {
         dispatch({type: 'FETCH_SUCCESS', payload: res.data});
       })

@@ -48,7 +48,7 @@ function SentenceBuilder() {
 
   const postSentence = () => {
     setEditedSentence('');
-    axios.post('http://localhost:5000/sentences/submit', {
+    axios.post('http://localhost:4000/sentences/submit', {
       "sentence": editedSentence.trimEnd()
     })
     .then(res => {
@@ -60,7 +60,7 @@ function SentenceBuilder() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:5000/words')
+    axios.get('http://localhost:4000/words')
       .then((res) => {
         dispatch({type: 'FETCH_SUCCESS', payload: res.data[0], wordTypes: Object.keys(res.data)});
         setWordTypes(Object.keys(res.data[0]));
