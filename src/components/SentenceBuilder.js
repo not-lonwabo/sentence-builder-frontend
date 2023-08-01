@@ -80,7 +80,7 @@ function SentenceBuilder() {
             : <div>
                 <div className="btn-group d-flex flex-wrap" aria-label="...">
                   {
-                    wordTypes.slice(1, wordTypes.length-2).map((speechType, index) => {
+                    wordTypes.map((speechType, index) => {
                       return <button key={speechType} type="button" onClick={() => clickType(speechType, index)} disabled={selectIndex === index} className="btn btn-secondary border w-100">{speechType}</button>
                     })
                   }
